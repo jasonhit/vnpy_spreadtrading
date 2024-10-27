@@ -44,6 +44,10 @@ class SpreadTakerAlgo(SpreadAlgoTemplate):
 
     def on_tick(self, tick: TickData) -> None:
         """"""
+        # 如果是非交易时间，不做任何事情
+        if not self.trading_time_manager.is_opening(self.spread.name, tick.datetime):
+            return
+        
         # Return if there are any existing orders
         if not self.is_order_finished():
             return

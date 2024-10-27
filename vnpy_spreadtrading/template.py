@@ -10,6 +10,8 @@ from vnpy.trader.utility import virtual, floor_to, ceil_to, round_to
 
 from .base import SpreadData, LegData, EngineType, AlgoItem
 
+from ls_tradingtime.trading_time_manager import ComposeTradingTimeManager
+
 if TYPE_CHECKING:
     from .engine import SpreadAlgoEngine, SpreadStrategyEngine
 
@@ -65,6 +67,8 @@ class SpreadAlgoTemplate:
 
         self.order_trade_volume: defaultdict = defaultdict(int)
         self.orders: Dict[str, OrderData] = {}
+
+        self.trading_time_manager = ComposeTradingTimeManager()
 
         self.write_log("算法已启动")
 
